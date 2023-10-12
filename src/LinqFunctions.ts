@@ -153,7 +153,7 @@ Array.prototype.SelectMany = function<T, U>(memberExpression : (element : T) => 
       return [] as U[];    
 
     for(let s of this.Where(s => s != undefined))
-      aggregate.concat(memberExpression(s));    
+        aggregate = aggregate.concat(memberExpression(s));    
 
     return aggregate as U[];
 }

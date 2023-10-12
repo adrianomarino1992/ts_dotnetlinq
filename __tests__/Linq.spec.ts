@@ -12,7 +12,7 @@ class Person
         this.Name = name;
         this.Age = age;
         this.Gender = gender;
-        this.DOCs = [];
+        this.DOCs = [1, 2, 3];
     }
 }
 
@@ -187,6 +187,15 @@ describe("Testing linq", ()=>{
 
         expect(typeof p[0]).toBe(typeof new Person("", 1, Gender.MALE));
         expect(p[0].Age).toBe(numberArray[0]);       
+        
+    });
+
+
+    test("Testing select many clause", ()=>
+    {        
+        let g = objectArray.SelectMany(s => s.DOCs);       
+
+        expect(g.Count()).toBe(12);       
         
     });
 
