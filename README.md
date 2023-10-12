@@ -7,7 +7,7 @@ Linq methods for Array in Typescript
 
 
 ```bash
-npm install mylinq
+npm install ts_linq_base
 ```
 
 # Usage
@@ -16,7 +16,7 @@ In your entrypoint file, use:
 
 
 ```typescript
-import 'mylinq';
+import 'ts_linq_base';
 ```
 ### Sample arrays
 

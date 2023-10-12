@@ -1,5 +1,5 @@
 {
-  "name": "mylink",
+  "name": "ts_linq_base",
   "version": "1.0.1",
   "description": "Basic .NET Linq functions to array in typescript",
   "main": "index.js",
