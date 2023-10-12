@@ -1,4 +1,4 @@
-# MYLINQ
+# ts_linq_base
 
 Linq methods for Array in Typescript
 
