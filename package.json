@@ -1,6 +1,6 @@
 {
   "name": "mylink",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Basic .NET Linq functions to array in typescript",
   "main": "index.js",
   "scripts": {
