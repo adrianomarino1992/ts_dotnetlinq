@@ -66,6 +66,28 @@ describe("Testing linq", ()=>{
         expect([].Any()).toBeFalsy();
     });
 
+    test("Testing remove", ()=>
+    {
+        let copy = stringArray.Where(s => true);
+        let init = copy.length;
+        let first = copy.First();
+        copy.Remove(first);
+        expect(copy.length).toBe(init -1);
+        expect(copy.Any(s => s == first)).toBeFalsy();
+        expect([].Any()).toBeFalsy();
+    });
+
+    test("Testing removeAll", ()=>
+    {
+        let copy = stringArray.Where(s => true);
+        let init = copy.length;
+        let element = copy.Where(s => s.startsWith("a")).First();
+        copy.RemoveAll(s => s.startsWith("a"));
+        expect(copy.All(s => s != element)).toBeTruthy();
+        expect(copy.length).toBe(init - stringArray.Where(s => s.startsWith("a")).Count());
+    });
+
+
     test("Testing all clause", ()=>
     {
         expect(stringArray.All(s => typeof s == "string")).toBeTruthy();

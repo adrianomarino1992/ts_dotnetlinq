@@ -6,6 +6,8 @@ declare interface Array<T>
   Count(predicate? : (element : T) => boolean) : number;
   Any(predicate? : (element : T) => boolean) : boolean;
   All(predicate : (element : T) => boolean) : boolean;
+  RemoveAll(predicate : (element : T) => boolean) : void;
+  Remove(obj : T) : void;
   FirstOrDefault(predicate? : (element : T) => boolean) : T | undefined;
   First(predicate? : (element : T) => boolean) : T;
   OrderBy<U>(memberExpression? : (element : T) => U) : Array<T>;

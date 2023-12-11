@@ -14,6 +14,30 @@ Array.prototype.Count = function<T>(predicate? :  (element : T) => boolean)
   return c;
 }
 
+Array.prototype.Remove = function<T>(obj : T) : void 
+{
+  let index = this.findIndex(s => s == obj);
+  
+  if(index <= -1)
+    return;
+
+  this.splice(index, 1);
+}
+
+
+Array.prototype.RemoveAll = function<T>(predicate : (element : T) => boolean) : void
+{
+  let toRemove : T[] = [];
+
+  this.Where(e => predicate(e)).forEach(e => toRemove.Add(e));  
+
+  if(!toRemove.Any())
+    return;
+
+  toRemove.forEach(e => this.Remove(e));
+  
+}
+
 Array.prototype.Any = function<T>(predicate? :  (element : T) => boolean) : boolean
 {
   return this.Count(predicate) > 0;
