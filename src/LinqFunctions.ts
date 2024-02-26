@@ -75,7 +75,8 @@ Array.prototype.Add = function<T>(obj : T) : void
 
 Array.prototype.AddRange = function<T>(objs : T[]) : void
 {
-  this.concat(...objs);
+  for(let i of objs)
+    this.push(i);
 }
 
 Array.prototype.Clear = function() : void
