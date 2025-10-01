@@ -285,6 +285,81 @@ Array.prototype.Avg = function<T>(memberExpression? : (element : T) => number) :
 
 }
 
+
+Array.prototype.Distinct = function<T>(memberExpression? : (element : T) => any) : Array<T>
+{
+    let result : T[] = [];
+    for(let i of this)
+      if(memberExpression)
+      {
+        if(!result.Any(s => memberExpression(s) == memberExpression(i)))
+            result.Add(i);
+
+      }else{
+
+        if(!result.Any(s => s == i))
+            result.Add(i);
+      }
+        
+    return result;
+}
+
+
+Array.prototype.LastOrDefault = function<T>(predicate? :  (element : T) => boolean) : T | undefined
+{
+  if(this.length == 0)
+    return undefined;
+  else{
+    if(!predicate)
+      return this[this.length -1];
+    else {
+      let r = this.filter(s => predicate(s));
+      if(r.length > 0)
+          return r[r.length -1];
+        else return undefined;
+    }
+  }
+}
+
+Array.prototype.Last = function<T>(predicate? :  (element : T) => boolean) : T
+{
+  if(this.length == 0)
+    throw new Error("The sequence do not contains elements");
+  if(!predicate)
+      return this[this.length -1];
+    else 
+    {
+        if(!this.Any(predicate))
+            throw new Error("The sequence do not contains elements");
+        let r = this.filter(s => predicate(s));
+        return r[r.length -1];
+    }
+}
+
+Array.prototype.Skip = function<T>(count : number) : Array<T>
+{
+    if(count <= 0)
+        return Array.from(this);
+    if(count >= this.length)
+        return [] as T[];
+    let result : T[] = [];
+    for(let i = count; i < this.length; i++)
+        result.Add(this[i]);
+    return result;
+}
+
+Array.prototype.Take = function<T>(count : number) : Array<T>
+{
+    if(count <= 0)
+        return [] as T[];
+    if(count >= this.length)
+        return Array.from(this);
+    let result : T[] = [];
+    for(let i = 0; i < count; i++)
+        result.Add(this[i]);
+    return result;
+}
+
 function IsNullOrUndefined(obj  : any) : boolean
 {
   return obj == undefined || obj == null;

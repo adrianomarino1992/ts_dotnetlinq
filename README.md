@@ -13,129 +13,132 @@ npm install ts_linq_base
 # Usage
 
 In your entrypoint file, use: 
-
-
-```typescript
-import 'ts_linq_base';
-```
-### Sample arrays
+### Sample Usage
 
 ```typescript
- let stringArray = ["adriano", "marino", "balera", "camila", "juliana", "andre"];
- let numberArray = [1, 5, 3, 7, 9, 3, 6];
- let dateArray = [new Date('2023-01-01'),new Date('2025-01-01'), new Date('2021-01-01')]
- let objectArray = 
- [
-        new Person("adriano", 950, Gender.MALE),
-        new Person("camila", 25, Gender.FEMALE),
-        new Person("juliana", 30, Gender.FEMALE),
-        new Person("andre", 30, Gender.MALE)
-
- ];
+// Sample arrays
+let stringArray = ["adriano", "marino", "balera", "camila", "juliana", "andre"];
+let numberArray = [1, 5, 3, 7, 9, 3, 6];
+let dateArray = [new Date('2023-01-01'), new Date('2025-01-01'), new Date('2021-01-01')];
+let objectArray = [
+       new Person("adriano", 950, Gender.MALE),
+       new Person("camila", 25, Gender.FEMALE),
+       new Person("juliana", 30, Gender.FEMALE),
+       new Person("andre", 30, Gender.MALE)
+];
 ```
 
 ### Where
 ```typescript
-let i = stringArray.Where(s => s.startsWith("a"));   
-        
-let c = objectArray.Where(s => s.Name.startsWith("a"));       
-
-let u = numberArray.Where(s => s > 2);
-
-let d = dateArray.Where(s => s > new Date('2022-01-01'));
-       
-
+stringArray.Where(s => s.startsWith("a")); // ["adriano", "andre"]
+objectArray.Where(s => s.Name.startsWith("a")); // [Person("adriano",950,MALE), Person("andre",30,MALE)]
+numberArray.Where(s => s > 2); // [5,3,7,9,3,6]
+dateArray.Where(s => s > new Date("2022-01-01")); // [2023-01-01, 2025-01-01]
 ```
-
 
 ### Count
-```typescript   
-let c = objectArray.Count();       
-
-let u = numberArray.Count(s => s > 2);
-
+```typescript
+objectArray.Count(); // 4
+numberArray.Count(s => s > 2); // 5
 ```
 
-
 ### Any
-```typescript   
-let i = stringArray.Any();
-
-let u = stringArray.Any(s => s.startsWith("a"));
-
+```typescript
+stringArray.Any(); // true
+stringArray.Any(s => s.startsWith("a")); // true
 ```
 
 ### All
-```typescript   
-let u = stringArray.All(s => s.startsWith("a"));
-
+```typescript
+stringArray.All(s => s.startsWith("a")); // false
 ```
-
 
 ### FirstOrDefault
-```typescript   
-stringArray.FirstOrDefault();
-
-stringArray.FirstOrDefault(s => s == "camila");       
-
+```typescript
+stringArray.FirstOrDefault(); // "adriano"
+stringArray.FirstOrDefault(s => s == "camila"); // "camila"
 ```
 
-### OrderBy 
-```typescript   
-let i = stringArray.OrderBy();
+### First
+```typescript
+numberArray.First(); // 1
+numberArray.First(s => s > 5); // 7
+```
 
-let u = objectArray.OrderBy(p => p.Name); 
+### Last
+```typescript
+numberArray.Last(); // 6
+numberArray.Last(s => s < 5); // 3
+```
 
-let v = objectArray.OrderByDescending(p => p.Name);
+### OrderBy
+```typescript
+stringArray.OrderBy(); // ["adriano","andre","balera","camila","juliana","marino"]
+objectArray.OrderBy(p => p.Name); // [adriano, andre, camila, juliana]
+objectArray.OrderByDescending(p => p.Name); // [juliana, camila, andre, adriano]
 ```
 
 ### GroupBy
-```typescript   
-let g = objectArray.GroupBy(u => u.Gender);
+```typescript
+objectArray.GroupBy(u => u.Gender);
+// MALE: [adriano, andre]
+// FEMALE: [camila, juliana]
 ```
 
 ### Aggregate
-```typescript   
- let g = numberArray.Aggregate();
+```typescript
+numberArray.Aggregate(); // 34
 ```
 
 ### Select
-```typescript   
-let g = numberArray.Select(s => s ** 2);  
-let u = objectArray.Select(s => s.Age);
-let p = numberArray.Select(s => new Person("Adriano", s, Gender.MALE));
+```typescript
+numberArray.Select(s => s ** 2); // [1,25,9,49,81,9,36]
+objectArray.Select(s => s.Age); // [950,25,30,30]
+numberArray.Select(s => new Person("Adriano", s, Gender.MALE)); // [Person(1), Person(5), Person(3), ...]
 ```
 
-
 ### SelectMany
-```typescript   
-let g = objectArray.SelectMany(s => s.DOCs);      
+```typescript
+objectArray.SelectMany(s => s.DOCs); // concatena todos os arrays DOCs em um único array
+```
+
+### Skip
+```typescript
+numberArray.Skip(3); // [7,9,3,6]
+```
+
+### Take
+```typescript
+numberArray.Take(3); // [1,5,3]
 ```
 
 ### Sum
-```typescript   
-[1,2,3,4,5].Sum(); 
-objectArray.Sum(s => s.Age);      
+```typescript
+[1,2,3,4,5].Sum(); // 15
+objectArray.Sum(s => s.Age); // 1035
 ```
 
 ### Max
-```typescript   
-[1,2,3,4,5].Max();
-objectArray.Max(s => s.Age);       
+```typescript
+[1,2,3,4,5].Max(); // 5
+objectArray.Max(s => s.Age); // 950
 ```
-
 
 ### Min
-```typescript   
-[1,2,3,4,5].Min(); 
-objectArray.Min(s => s.Age);      
+```typescript
+[1,2,3,4,5].Min(); // 1
+objectArray.Min(s => s.Age); // 25
 ```
 
-
 ### Avg
-```typescript   
-[1,2,3,4,5].Avg(); 
-objectArray.Avg(s => s.Age);      
+```typescript
+[1,2,3,4,5].Avg(); // 3
+objectArray.Avg(s => s.Age); // 258.75
+```
+
+### Distinct
+```typescript
+[1,2,2,3,4,5,5].Distinct(); // [1,2,3,4,5]
 ```
 
 

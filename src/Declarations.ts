@@ -21,6 +21,11 @@ declare interface Array<T>
   Max(memberExpression? : (element : T) => number) : number;
   Min(memberExpression? : (element : T) => number) : number;
   Avg(memberExpression? : (element : T) => number) : number;
+  Distinct(memberExpression?: (element : T) => any) : Array<T>;
+  LastOrDefault(predicate? : (element : T) => boolean) : T | undefined;
+  Last(predicate? : (element : T) => boolean) : T;
+  Skip(count : number) : Array<T>;
+  Take(count : number) : Array<T>;
 }
 
 declare interface IComparable<T>
